@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Browser Games</title>
+</head>
+<body>
+
+  <h1>Play Games</h1>
+
+  <div id="gameList"></div>
+
+  <script>
+    fetch('/list/browser-games')
+      .then(res => res.json())
+      .then(files => {
+        const container = document.getElementById('gameList');
+
+        files.forEach(file => {
+          if (file.endsWith('.html')) {
+            const btn = document.createElement('button');
+            btn.textContent = file;
+            btn.onclick = () => {
+              window.location.href = 'browser-games/' + file;
+            };
+            container.appendChild(btn);
+          }
+        });
+      });
+  </script>
+
+  <br><br>
+  <a href="index.html">Back</a>
+
+</body>
+</html>
