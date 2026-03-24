@@ -2,6 +2,69 @@
 <html>
 <head>
   <title>Browser Games</title>
+
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: white;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    iframe {
+      margin-top: 20px;
+      width: 800px;
+      height: 500px;
+      border: none;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Browser Games</h1>
+
+<div id="gameList"></div>
+
+<iframe id="gameFrame"></iframe>
+
+<script>
+  fetch('/list/browser-games')
+    .then(res => res.json())
+    .then(files => {
+      const list = document.getElementById('gameList');
+      const frame = document.getElementById('gameFrame');
+
+      files.forEach(file => {
+        if (file.endsWith('.html')) {
+          const btn = document.createElement('button');
+          btn.textContent = file;
+
+          btn.onclick = () => {
+            frame.src = 'browser-games/' + file;
+          };
+
+          list.appendChild(btn);
+        }
+      });
+    });
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+  <title>Browser Games</title>
 </head>
 <body>
 
