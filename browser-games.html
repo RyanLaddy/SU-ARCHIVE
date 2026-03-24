@@ -5,7 +5,7 @@
 
   <style>
     body {
-      background-color: #1e1e1e;
+      background: #1e1e1e;
       color: white;
       text-align: center;
       font-family: Arial;
@@ -35,64 +35,29 @@
 <h1>Browser Games</h1>
 
 <div id="gameList"></div>
-
 <iframe id="gameFrame"></iframe>
 
 <script>
-  fetch('/list/browser-games')
-    .then(res => res.json())
-    .then(files => {
-      const list = document.getElementById('gameList');
-      const frame = document.getElementById('gameFrame');
+  // 👇 MANUAL LIST (this replaces auto folder reading)
+  const games = [
+    { name: "Click Game", file: "click-game.html" },
+    { name: "Snake", file: "snake.html" }
+  ];
 
-      files.forEach(file => {
-        if (file.endsWith('.html')) {
-          const btn = document.createElement('button');
-          btn.textContent = file;
+  const list = document.getElementById("gameList");
+  const frame = document.getElementById("gameFrame");
 
-          btn.onclick = () => {
-            frame.src = 'browser-games/' + file;
-          };
+  games.forEach(game => {
+    const btn = document.createElement("button");
+    btn.textContent = game.name;
 
-          list.appendChild(btn);
-        }
-      });
-    });
+    btn.onclick = () => {
+      frame.src = "browser-games/" + game.file;
+    };
+
+    list.appendChild(btn);
+  });
 </script>
-
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
-  <title>Browser Games</title>
-</head>
-<body>
-
-  <h1>Play Games</h1>
-
-  <div id="gameList"></div>
-
-  <script>
-    fetch('/list/browser-games')
-      .then(res => res.json())
-      .then(files => {
-        const container = document.getElementById('gameList');
-
-        files.forEach(file => {
-          if (file.endsWith('.html')) {
-            const btn = document.createElement('button');
-            btn.textContent = file;
-            btn.onclick = () => {
-              window.location.href = 'browser-games/' + file;
-            };
-            container.appendChild(btn);
-          }
-        });
-      });
-  </script>
-
-  <br><br>
-  <a href="index.html">Back</a>
 
 </body>
 </html>
